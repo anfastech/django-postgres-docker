@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+}
+
+.App::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content: "";
+  width: 100vw;
+  height: 100vh;
+  opacity: 1;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0) 98%,
+    rgb(0, 0, 0) 100%
+  );
+  background: linear-gradient();
+}
