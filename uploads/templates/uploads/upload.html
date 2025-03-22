@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Photos and Text</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Upload Photos and Text</h1>
+        <form method="post" enctype="multipart/form-data" class="bg-white p-6 rounded shadow-md">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Upload</button>
+        </form>
+
+        <div class="mt-8">
+            <h2 class="text-xl font-bold mb-4">Uploaded Content</h2>
+            {% for upload in uploads %}
+                <div class="bg-white p-4 rounded shadow-md mb-4">
+                    <h3 class="text-lg font-semibold">{{ upload.title }}</h3>
+                    <p class="text-gray-700">{{ upload.description }}</p>
+                    <img src="{{ upload.image.url }}" alt="{{ upload.title }}" class="mt-2 max-w-full h-auto">
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: djangoproject001       # Database name
+      POSTGRES_USER: django001            # Database user
+      POSTGRES_PASSWORD: django001        # Database password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/  # Persistent volume for PostgreSQL data
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app  # Mount the current directory to /app in the container
+    ports:
+      - "8000:8000"  # Expose port 8000 on the host
+    depends_on:
+      - db  # Ensure the db service starts before the web service
+    environment:
+      POSTGRES_NAME: djangoproject001  # Database name (for Django)
+      POSTGRES_USER: django001          # Database user (for Django)
+      POSTGRES_PASSWORD: django001      # Database password (for Django)
+      POSTGRES_HOST: db                 # Database host (service name in docker-compose.yml)
+
+volumes:
+  postgres_data:  # Define a named volume for PostgreSQL data persistence
